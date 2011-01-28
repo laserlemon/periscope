@@ -1,0 +1,3 @@
+module Periscope
+  # Your code goes here...
+end
