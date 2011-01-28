@@ -1,21 +1,21 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "periscope/version"
+$:.push File.expand_path('../lib', __FILE__)
+require 'periscope/version'
 
 Gem::Specification.new do |s|
-  s.name        = "periscope"
+  s.name        = 'periscope'
   s.version     = Periscope::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ['Steve Richert']
+  s.email       = ['steve.richert@gmail.com']
+  s.homepage    = 'https://github.com/laserlemon/periscope'
+  s.summary     = %(Bring your models' scopes up above the surface.)
+  s.description = %(Periscope acts like attr_accessible or attr_protected, but for your models' scopes.)
 
-  s.rubyforge_project = "periscope"
+  s.rubyforge_project = 'periscope'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f) }
+  s.require_paths = ['lib']
 end
