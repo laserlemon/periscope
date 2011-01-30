@@ -1,3 +1,2 @@
-module Periscope
-  # Your code goes here...
-end
+require 'periscope/adapters/active_record'
+ActiveRecord::Base.send(:include, Periscope::ActiveRecord) if defined?(ActiveRecord)
