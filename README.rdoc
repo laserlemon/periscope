@@ -1,0 +1,58 @@
+= Periscope
+
+Bring your models' scopes up above the surface.
+
+Periscope acts like +attr_accessible+ or +attr_protected+, but for your models' scopes.
+
+== The Problem
+
+More often than not, the index action in a RESTful Rails controller is expected to do a lot more than simply return all the records for a given model. We ask it to do all sorts of stuff like filtering, sorting and paginating results. Of course, this is typically done using _scopes_.
+
+But sometimes it can get ugly building long, complicated chains of scope in the controller, especially when you try to give your users control over the scoping. Picture this:
+
+  def index
+    @articles = Article.scoped
+    @articles = @articles.published_after(params[:published_after]) if params.key?(:published_after)
+    @articles = @articles.published_before(params[:published_before]) if params.key?(:published_before)
+  end
+
+You can imagine how bad this would get if more than two scopes were involved.
+
+== The Solution
+
+With Periscope, you can have this instead:
+
+  def index
+    @articles = Article.periscope(request.query_parameters)
+  end
+
+The +periscope+ method will find keys in your params matching your scope names and chain your scopes for you.
+
+<b>Note:</b> We're using <code>request.query_parameters</code> so we can exclude your controller and action params. <code>request.query_parameters</code> will just return the params that show up after the "?" in the URL.
+
+== But Wait!
+
+"What if I don't want to make all my scopes publicly accessible?"
+
+In your model you can use either the +scope_accessible+ or +scope_protected+ method to specify which scopes you want Periscope to pay attention to.
+
+  class User < ActiveRecord::Base
+    attr_accessible :name, :gender, :salary
+  
+    scope :gender, lambda{|g| where(:gender => g) }
+    scope :makes_more_than, lambda{|s| where('users.salary >= ?', s) }
+  
+    scope_accessible :gender
+  end
+
+And in your controller:
+
+  class UsersController < ApplicationController
+    def index
+      @users = User.periscope(request.query_parameters)
+    end
+  end
+
+Now, requests to <code>/users?gender=male</code> will filter results to only male users. But a request to <code>/users?makes_more_than=1000000</code> will return all users, silently ignoring the protected scope.
+
+By default, all scopes are protected.
