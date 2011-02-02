@@ -1,3 +1,4 @@
+require 'active_support/core_ext/class/attribute.rb'
 require 'periscope/permission_set'
 
 module Periscope
@@ -49,10 +50,12 @@ module Periscope
         def scopes_accessible_by_default
           []
         end
+      end
 
+      module InstanceMethods
         protected
           def sanitize_for_search(params)
-            scope_authorizer.sanitize(params)
+            search_authorizer.sanitize(params)
           end
 
           def search_authorizer

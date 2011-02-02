@@ -6,7 +6,19 @@ shared_examples_for 'a permission set' do
     permission_set.to_a.should == values.uniq
   end
 
-  it 'stingifies values when adding' do
+  it 'initializes with no values' do
+    lambda{ described_class.new }.should_not raise_error
+    described_class.new.should be_empty
+  end
+
+  it 'stringifies values when initializing' do
+    values = [:one, :two, :three]
+
+    permission_set = described_class.new(values)
+    permission_set.to_a.should == values.map(&:to_s)
+  end
+
+  it 'stringifies values when adding' do
     values = [:one, :two, :three]
 
     permission_set = described_class.new + values

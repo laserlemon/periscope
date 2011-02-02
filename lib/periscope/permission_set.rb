@@ -3,28 +3,32 @@ require 'periscope/sanitizer'
 
 module Periscope
   class PermissionSet < Set
+    def initialize(values = nil)
+      super(values, &:to_s)
+    end
+
     def +(values)
       super(values.map(&:to_s))
     end
 
-    def include?(key)
-      super(key.to_s)
+    def include?(value)
+      super(value.to_s)
     end
   end
 
   class WhiteList < PermissionSet
     include Sanitizer
 
-    def deny?(key)
-      !include?(key)
+    def deny?(value)
+      !include?(value)
     end
   end
 
   class BlackList < PermissionSet
     include Sanitizer
 
-    def deny?(key)
-      include?(key)
+    def deny?(value)
+      include?(value)
     end
   end
 end
