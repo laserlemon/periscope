@@ -39,7 +39,7 @@ module Periscope
       end
 
       def accessible_scopes
-        self._accessible_scopes ||= WhiteList.new.tap do |list|
+        self._accessible_scopes ||= WhiteList.new(scopes_accessible_by_default).tap do |list|
           list.logger = logger if respond_to?(:logger)
         end
       end
