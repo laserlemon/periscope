@@ -7,7 +7,7 @@ module Periscope
       include Abstract
 
       module ClassMethods
-        def periscope(params)
+        def periscope(params = {})
           periscope_authorizer.sanitize(params).inject(scoped) do |chain, (key, value)|
             chain.send(key, value)
           end
