@@ -8,8 +8,8 @@ module Periscope
 
       module ClassMethods
         def periscope(params)
-          params.inject(scoped) do |chain, (key, value)|
-            accessible_scopes.include?(key) ? chain.send(key, value) : chain
+          periscope_authorizer.sanitize(params).inject(scoped) do |chain, (key, value)|
+            chain.send(key, value)
           end
         end
       end

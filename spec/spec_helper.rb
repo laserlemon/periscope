@@ -1,4 +1,5 @@
-require 'active_support'
+Dir[File.expand_path('../support/**/*.rb', __FILE__)].each{|f| require f }
+
 require 'periscope'
 
 class FakeLogger
@@ -11,4 +12,3 @@ class FakeLogger
   end
 end
 
-Dir[File.expand_path('../support/**/*.rb', __FILE__)].each{|f| require f }
