@@ -1,27 +1,22 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path('../lib', __FILE__)
-require 'periscope/version'
+# encoding: utf-8
 
-Gem::Specification.new do |s|
-  s.name        = 'periscope'
-  s.version     = Periscope::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Steve Richert']
-  s.email       = ['steve.richert@gmail.com']
-  s.homepage    = 'https://github.com/laserlemon/periscope'
-  s.summary     = %(Bring your models' scopes up above the surface.)
-  s.description = %(Periscope acts like attr_accessible or attr_protected, but for your models' scopes.)
+Gem::Specification.new do |gem|
+  gem.name    = 'periscope'
+  gem.version = '1.0.0'
 
-  s.rubyforge_project = 'periscope'
+  gem.authors     = ['Steve Richert']
+  gem.email       = ['steve.richert@gmail.com']
+  gem.description = %(Periscope: like attr_accessible, but for your models' scopes)
+  gem.summary     = %(Bring your models' scopes up above the surface)
+  gem.homepage    = 'https://github.com/laserlemon/periscope'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f) }
-  s.require_paths = ['lib']
+  gem.add_dependency 'activesupport', '~> 3.0'
 
-  s.add_dependency 'activesupport', '>= 3.0.0'
+  gem.add_development_dependency 'activerecord', '~> 3.0'
+  gem.add_development_dependency 'rspec', '~> 2.10'
+  gem.add_development_dependency 'sqlite3'
 
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'activerecord', '>= 3.0.0'
+  gem.files         = `git ls-files`.split($\)
+  gem.test_files    = gem.files.grep(/^spec/)
+  gem.require_paths = ['lib']
 end
