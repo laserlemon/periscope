@@ -1,5 +1,4 @@
 require 'active_support'
-require 'periscope/version'
 
 Dir[File.expand_path('../periscope/adapters/**/*.rb', __FILE__)].each{|f| require f }
 
