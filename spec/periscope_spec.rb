@@ -43,6 +43,13 @@ describe Periscope do
     model.periscope('foo' => 'baz', :bar => 'mitzvah')
   end
 
+  it 'ignores protected scopes when mixed with accessible scopes' do
+    expect_scopes(:foo => 'baz')
+    model.should_not_receive(:bar)
+    model.scope_accessible(:foo)
+    model.periscope(:foo => 'baz', :bar => 'mitzvah')
+  end
+
   it 'prefixes method names in order to avoid collisions' do
     expect_scopes(:scope_for_begin => '1983-05-28', :scope_for_end => '2083-05-28')
     model.scope_accessible(:begin, :end, :prefix => :scope_for)
