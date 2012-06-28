@@ -6,7 +6,7 @@ module Periscope
 
   def periscope(params = {})
     params.inject(periscope_default_scope) do |chain, (scope, value)|
-      periscope_options.key?(scope.to_s) ? chain.send(scope, value) : chain
+      periscope_call(chain, scope, value)
     end
   end
 
@@ -18,5 +18,15 @@ module Periscope
 
   def periscope_default_scope
     where
+  end
+
+  def periscope_call(chain, scope, value)
+    method = periscope_method(scope)
+    method ? chain.send(method, value) : chain
+  end
+
+  def periscope_method(scope)
+    return unless options = periscope_options[scope.to_s]
+    [options[:prefix], scope].compact.map(&:to_s).join('_')
   end
 end
