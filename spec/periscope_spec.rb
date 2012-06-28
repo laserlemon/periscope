@@ -87,4 +87,12 @@ describe Periscope do
     model.scope_accessible(:foo, :parser => proc{|v| v.upcase })
     model.periscope(:foo => 'bar')
   end
+
+  it 'allows custom parameter parsing via custom parser' do
+    parser = mock.as_null_object
+    parser.should_receive(:call).once.with('bar').and_return('BAR')
+    expect_scopes(:foo => 'BAR')
+    model.scope_accessible(:foo, :parser => parser)
+    model.periscope(:foo => 'bar')
+  end
 end
