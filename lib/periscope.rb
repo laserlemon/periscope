@@ -27,6 +27,6 @@ module Periscope
 
   def periscope_method(scope)
     return unless options = periscope_options[scope.to_s]
-    [options[:prefix], scope].compact.map(&:to_s).join('_')
+    [options[:prefix], scope, options[:suffix]].compact.map(&:to_s).join('_')
   end
 end
