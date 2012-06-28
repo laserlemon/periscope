@@ -67,4 +67,11 @@ describe Periscope do
     model.scope_accessible(:begin, :end, :prefix => :foo, :suffix => :bar)
     model.periscope(:begin => '1983-05-28', :end => '2083-05-28')
   end
+
+  it 'allows multiple scope_accessible calls' do
+    expect_scopes(:foo => 'baz', :bar => 'mitzvah')
+    model.scope_accessible(:foo)
+    model.scope_accessible(:bar)
+    model.periscope(:foo => 'baz', :bar => 'mitzvah')
+  end
 end
