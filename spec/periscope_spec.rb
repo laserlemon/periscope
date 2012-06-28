@@ -54,4 +54,10 @@ describe Periscope do
     model.scope_accessible(:begin, :end, :suffix => :scope)
     model.periscope(:begin => '1983-05-28', :end => '2083-05-28')
   end
+
+  it 'prefixes and suffixes method names' do
+    expect_scopes(:foo_begin_bar => '1983-05-28', :foo_end_bar => '2083-05-28')
+    model.scope_accessible(:begin, :end, :prefix => :foo, :suffix => :bar)
+    model.periscope(:begin => '1983-05-28', :end => '2083-05-28')
+  end
 end
