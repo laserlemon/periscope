@@ -5,8 +5,8 @@ module Periscope
   end
 
   def periscope(params = {})
-    params.inject(periscope_default_scope) do |chain, (scope, value)|
-      periscope_call(chain, scope, value)
+    params.inject(periscope_default_scope) do |chain, (scope, param)|
+      periscope_call(chain, scope.to_s, param)
     end
   end
 
@@ -20,18 +20,18 @@ module Periscope
     where
   end
 
-  def periscope_call(chain, scope, value)
+  def periscope_call(chain, scope, param)
     method = periscope_method(scope)
-    method ? chain.send(method, periscope_value(scope, value)) : chain
+    method ? chain.send(method, periscope_value(scope, param)) : chain
   end
 
   def periscope_method(scope)
-    return unless options = periscope_options[scope.to_s]
+    return unless options = periscope_options[scope]
     [options[:prefix], scope, options[:suffix]].compact.map(&:to_s).join('_')
   end
 
-  def periscope_value(scope, value)
-    parser = periscope_options.fetch(scope.to_s, {})[:parser]
-    parser ? parser.call(value) : value
+  def periscope_value(scope, param)
+    parser = periscope_options[scope][:parser]
+    parser ? parser.call(param) : param
   end
 end
