@@ -21,17 +21,23 @@ module Periscope
   end
 
   def periscope_call(chain, scope, param)
-    method = periscope_method(scope)
-    method ? chain.send(method, periscope_value(scope, param)) : chain
+    return chain unless options = periscope_options[scope]
+
+    method = periscope_method(scope, options)
+    values = periscope_values(param, options)
+
+    if options[:boolean]
+      values.first ? chain.send(method) : chain
+    else
+      chain.send(method, *values)
+    end
   end
 
-  def periscope_method(scope)
-    return unless options = periscope_options[scope]
+  def periscope_method(scope, options)
     [options[:prefix], scope, options[:suffix]].compact.map(&:to_s).join('_')
   end
 
-  def periscope_value(scope, param)
-    parser = periscope_options[scope][:parser]
-    parser ? parser.call(param) : param
+  def periscope_values(param, options)
+    options[:parser] ? options[:parser].call(param) : [param]
   end
 end
