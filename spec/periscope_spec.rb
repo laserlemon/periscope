@@ -74,4 +74,11 @@ describe Periscope do
     model.scope_accessible(:bar)
     model.periscope(:foo => 'baz', :bar => 'mitzvah')
   end
+
+  it 'overrides scope_accessible options per call' do
+    expect_scopes(:start => '1983-05-28', :end_scope => '2083-05-28')
+    model.scope_accessible(:start, :end, :suffix => :scope)
+    model.scope_accessible(:start)
+    model.periscope(:start => '1983-05-28', :end => '2083-05-28')
+  end
 end
