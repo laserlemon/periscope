@@ -81,4 +81,10 @@ describe Periscope do
     model.scope_accessible(:start)
     model.periscope(:start => '1983-05-28', :end => '2083-05-28')
   end
+
+  it 'allows custom parameter parsing via proc' do
+    expect_scopes(:foo => 'BAR')
+    model.scope_accessible(:foo, :parser => proc{|v| v.upcase })
+    model.periscope(:foo => 'bar')
+  end
 end
