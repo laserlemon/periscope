@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Periscope do
   let(:model) do
-    klass = mock
+    klass = mock.as_null_object
     klass.extend(Periscope)
     klass.stub(:periscope_default_scope => klass)
     klass
@@ -15,13 +15,13 @@ describe Periscope do
   end
 
   it 'uses the default scope for no params' do
-    scoped = mock
+    scoped = mock.as_null_object
     model.should_receive(:periscope_default_scope).once.and_return(scoped)
     model.periscope.should == scoped
   end
 
   it 'uses the default scope for empty params' do
-    scoped = mock
+    scoped = mock.as_null_object
     model.should_receive(:periscope_default_scope).once.and_return(scoped)
     model.periscope({}).should == scoped
   end
