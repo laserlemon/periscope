@@ -6,8 +6,7 @@ end
 
 FactoryGirl.define do
   factory :user do
-    name 'Steve'
-    gender 'male'
-    salary 1_000_000
+    gender{ %(male female)[rand(2)] }
+    salary{ rand(1_000_001) }
   end
 end
