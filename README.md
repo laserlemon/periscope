@@ -40,10 +40,8 @@ Within your model you can use the `scope_accessible` method to specify which sco
 
 ```ruby
 class User < ActiveRecord::Base
-  attr_accessible :name, :gender, :salary
-
-  scope :gender, lambda{|g| where(:gender => g) }
-  scope :makes_more_than, lambda{|s| where('users.salary >= ?', s.to_i) }
+  scope :gender, lambda{|g| where(gender: g) }
+  scope :makes, lambda{|s| where('salary >= ?', s) }
 
   scope_accessible :gender
 end
@@ -59,9 +57,73 @@ class UsersController < ApplicationController
 end
 ```
 
-Requests to `/users?gender=male` will filter results to only male users. But a request to `/users?makes_more_than=1000000` will return all users, silently ignoring the protected scope.
+Requests to `/users?gender=male` will filter results to only male users. But a request to `/users?makes=1000000` will return all users, silently ignoring the protected scope.
 
 By default, all scopes are protected.
+
+## There's More!
+
+### Custom Parameter Parsing
+
+Sometimes the values you get from the query parameters aren't quite good enough. They may need to be massaged in order to work with your scopes and class methods. In those cases, you can provide a `:parser` option to your `scope_accessible` method.
+
+Parsers must respond to the `call` method, receiving the raw query parameter and returning an array of arguments to pass to the scope or class method.
+
+```ruby
+class User < ActiveRecord::Base
+  scope :gender, lambda{|g| where(gender: g) }
+
+  scope_accessible :gender, parser: lambda{|g| [g.downcase] }
+end
+```
+
+### On/Off Scopes
+
+But not all scopes accept arguments. For scopes that you want to toggle on or off, you can set a `:boolean => true` option. Whenever the received parameter is truthy, the scope will be applied. Otherwise, it will be skipped.
+
+```ruby
+class User < ActiveRecord::Base
+  scope :male, where(gender: 'male')
+  scope :female, where(gender: 'female')
+
+  scope_accessible :male, :female, boolean: true
+end
+```
+
+### Custom Method Names
+
+Sometimes the query parameters you want to open up to your users may collide with existing method names or reserved Ruby words. In order to avoid collision, you can set a `:method` option to specify what method to use for a query parameter.
+
+```ruby
+class Project < ActiveRecord::Base
+  scope_accessible :begin, method: :begins_after
+  scope_accessible :end, method: :ends_before
+
+  def self.begins_after(date)
+    where('begins_at >= ?', date)
+  end
+
+  def self.ends_before(date)
+    where('ends_at <= ?', date)
+  end
+end
+```
+
+Alternatively, you can set `:prefix` and/or `:suffix` options, which will be applied to the query parameter name to determine the corresponding method name.
+
+```ruby
+class Project < ActiveRecord::Base
+  scope_accessible :begin, :end, suffix: '_date'
+
+  def self.begin_date(date)
+    where('begins_at >= ?', date)
+  end
+
+  def self.end_date(date)
+    where('ends_at <= ?', date)
+  end
+end
+```
 
 ## This sucks. How can I make it better?
 
