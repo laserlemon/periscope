@@ -34,7 +34,7 @@ module Periscope
   end
 
   def periscope_method(scope, options)
-    [options[:prefix], scope, options[:suffix]].compact.join
+    options[:method] || [options[:prefix], scope, options[:suffix]].compact.join
   end
 
   def periscope_values(param, options)

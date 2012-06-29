@@ -46,6 +46,13 @@ shared_examples 'periscopic' do
       model.periscope(:foo => 'baz', :bar => 'mitzvah')
     end
 
+    it 'assigns method names in order to avoid collisions' do
+      expect_scopes(:begins_after => ['1983-05-28'], :ends_before => ['2083-05-28'])
+      model.scope_accessible(:begin, :method => :begins_after)
+      model.scope_accessible(:end, :method => :ends_before)
+      model.periscope(:begin => '1983-05-28', :end => '2083-05-28')
+    end
+
     it 'prefixes method names in order to avoid collisions' do
       expect_scopes(:scope_for_begin => ['1983-05-28'], :scope_for_end => ['2083-05-28'])
       model.scope_accessible(:begin, :end, :prefix => 'scope_for_')
