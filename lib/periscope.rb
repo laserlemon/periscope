@@ -17,7 +17,7 @@ module Periscope
   end
 
   def periscope_default_scope
-    where
+    raise NotImplementedError
   end
 
   def periscope_call(chain, scope, param)
