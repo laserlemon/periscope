@@ -1,4 +1,4 @@
-# Periscope
+# Periscope [![Build Status](https://secure.travis-ci.org/laserlemon/periscope.png)](http://travis-ci.org/laserlemon/periscope) [![Dependency Status](https://gemnasium.com/laserlemon/periscope.png)](https://gemnasium.com/laserlemon/periscope)
 
 Periscope provides a simple way to chain scopes on your models and to open those scopes up to your users.
 
