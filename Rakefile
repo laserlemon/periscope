@@ -1,4 +1,9 @@
+require 'bundler/gem_helper'
 require 'rspec/core/rake_task'
+
+Bundler::GemHelper.install_tasks(:name => 'periscope')
+Bundler::GemHelper.install_tasks(:name => 'periscope-activerecord')
+Bundler::GemHelper.install_tasks(:name => 'periscope-mongo_mapper')
 
 ADAPTERS = %w(active_record mongo_mapper)
 
