@@ -2,6 +2,15 @@
 
 Periscope provides a simple way to chain scopes on your models and to open those scopes up to your users.
 
+## Installation
+
+Periscope sits on top of your favorite ORM. Currently, the following ORMs are supported through individual gems extending Periscope:
+
+* ActiveRecord ([periscope-activerecord](https://rubygems.org/gems/periscope-activerecord))
+* MongoMapper ([periscope-mongo_mapper](https://rubygems.org/gems/periscope-mongo_mapper))
+
+Simply add the gem to your bundle and you're off!
+
 ## The Problem
 
 More often than not, the index action in a RESTful Rails controller is expected to do a lot more than simply return all the records for a given model. We ask it to do all sorts of stuff like filtering, sorting and paginating results. Of course, this is typically done using _scopes_.
