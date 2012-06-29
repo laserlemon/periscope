@@ -48,19 +48,19 @@ shared_examples 'periscopic' do
 
     it 'prefixes method names in order to avoid collisions' do
       expect_scopes(:scope_for_begin => ['1983-05-28'], :scope_for_end => ['2083-05-28'])
-      model.scope_accessible(:begin, :end, :prefix => :scope_for)
+      model.scope_accessible(:begin, :end, :prefix => 'scope_for_')
       model.periscope(:begin => '1983-05-28', :end => '2083-05-28')
     end
 
     it 'suffixes method names in order to avoid collisions' do
       expect_scopes(:begin_scope => ['1983-05-28'], :end_scope => ['2083-05-28'])
-      model.scope_accessible(:begin, :end, :suffix => :scope)
+      model.scope_accessible(:begin, :end, :suffix => '_scope')
       model.periscope(:begin => '1983-05-28', :end => '2083-05-28')
     end
 
     it 'prefixes and suffixes method names' do
       expect_scopes(:foo_begin_bar => ['1983-05-28'], :foo_end_bar => ['2083-05-28'])
-      model.scope_accessible(:begin, :end, :prefix => :foo, :suffix => :bar)
+      model.scope_accessible(:begin, :end, :prefix => 'foo_', :suffix => '_bar')
       model.periscope(:begin => '1983-05-28', :end => '2083-05-28')
     end
 
@@ -73,7 +73,7 @@ shared_examples 'periscopic' do
 
     it 'overrides scope_accessible options per call' do
       expect_scopes(:start => ['1983-05-28'], :end_scope => ['2083-05-28'])
-      model.scope_accessible(:start, :end, :suffix => :scope)
+      model.scope_accessible(:start, :end, :suffix => '_scope')
       model.scope_accessible(:start)
       model.periscope(:start => '1983-05-28', :end => '2083-05-28')
     end
