@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
 
   gem.files = %w(
     LICENSE
+    lib/periscope-mongo_mapper.rb
     lib/periscope/adapters/mongo_mapper.rb
     periscope-mongo_mapper.gemspec
     README.md
