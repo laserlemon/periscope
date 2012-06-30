@@ -4,8 +4,9 @@ require 'rspec/core/rake_task'
 Bundler::GemHelper.install_tasks(:name => 'periscope')
 Bundler::GemHelper.install_tasks(:name => 'periscope-activerecord')
 Bundler::GemHelper.install_tasks(:name => 'periscope-mongo_mapper')
+Bundler::GemHelper.install_tasks(:name => 'periscope-mongoid')
 
-ADAPTERS = %w(active_record mongo_mapper)
+ADAPTERS = %w(active_record mongo_mapper mongoid)
 
 ADAPTERS.each do |adapter|
   desc "Run RSpec code examples for #{adapter} adapter"

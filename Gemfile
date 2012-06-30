@@ -7,3 +7,4 @@ end
 gemspec :name => 'periscope'
 gemspec :name => 'periscope-activerecord'
 gemspec :name => 'periscope-mongo_mapper'
+gemspec :name => 'periscope-mongoid'

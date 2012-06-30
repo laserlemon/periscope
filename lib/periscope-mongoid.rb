@@ -1,0 +1,1 @@
+require 'periscope/adapters/mongoid'
