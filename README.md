@@ -9,6 +9,7 @@ Periscope sits on top of your favorite ORM. Currently, the following ORMs are su
 * ActiveRecord ([periscope-activerecord](https://rubygems.org/gems/periscope-activerecord))
 * MongoMapper ([periscope-mongo_mapper](https://rubygems.org/gems/periscope-mongo_mapper))
 * Mongoid ([periscope-mongoid](https://rubygems.org/gems/periscope-mongoid))
+* DataMapper ([periscope-data_mapper](https://rubygems.org/gems/periscope-data_mapper))
 
 Simply add the gem to your bundle and you're off!
 

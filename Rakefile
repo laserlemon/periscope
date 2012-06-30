@@ -5,8 +5,9 @@ Bundler::GemHelper.install_tasks(:name => 'periscope')
 Bundler::GemHelper.install_tasks(:name => 'periscope-activerecord')
 Bundler::GemHelper.install_tasks(:name => 'periscope-mongo_mapper')
 Bundler::GemHelper.install_tasks(:name => 'periscope-mongoid')
+Bundler::GemHelper.install_tasks(:name => 'periscope-data_mapper')
 
-ADAPTERS = %w(active_record mongo_mapper mongoid)
+ADAPTERS = %w(active_record mongo_mapper mongoid data_mapper)
 
 ADAPTERS.each do |adapter|
   desc "Run RSpec code examples for #{adapter} adapter"

@@ -1,6 +1,6 @@
 require 'database_cleaner'
 
-DatabaseCleaner['active_record'].strategy = :truncation
+DatabaseCleaner['data_mapper'].strategy = :truncation
 
 RSpec.configure do |config|
   config.before do
