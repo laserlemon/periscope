@@ -9,3 +9,5 @@ gemspec :name => 'periscope-activerecord'
 gemspec :name => 'periscope-mongo_mapper'
 gemspec :name => 'periscope-mongoid'
 gemspec :name => 'periscope-data_mapper'
+
+gem 'rake', '~> 0.9.0'

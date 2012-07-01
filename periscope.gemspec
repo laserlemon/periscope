@@ -10,7 +10,6 @@ Gem::Specification.new do |gem|
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/laserlemon/periscope'
 
-  gem.add_development_dependency 'rake', '~> 0.9'
   gem.add_development_dependency 'rspec', '~> 2.0'
 
   gem.files = %w(
