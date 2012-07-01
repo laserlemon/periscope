@@ -1,5 +1,5 @@
 require 'periscope'
-require 'data_mapper'
+require 'dm-core'
 
 module Periscope
   module Adapters
