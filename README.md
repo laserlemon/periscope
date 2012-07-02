@@ -136,7 +136,9 @@ class Project < ActiveRecord::Base
 end
 ```
 
-## This sucks. How can I make it better?
+## This sucks.
+
+How can I make it better?
 
 1. Fork it.
 2. Make it better.
