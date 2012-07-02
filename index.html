@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Periscope by laserlemon</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Periscope</h1>
+        <p>Push your models' scopes up to the surface.</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/laserlemon/periscope" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/laserlemon/periscope/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/laserlemon/periscope/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Periscope <a href="http://travis-ci.org/laserlemon/periscope"><img src="https://secure.travis-ci.org/laserlemon/periscope.png" alt="Build Status"></a> <a href="https://gemnasium.com/laserlemon/periscope"><img src="https://gemnasium.com/laserlemon/periscope.png" alt="Dependency Status"></a>
+</h1>
+
+<p>Periscope provides a simple way to chain scopes on your models and to open those scopes up to your users.</p>
+
+<h2>Installation</h2>
+
+<p>Periscope sits on top of your favorite ORM. Currently, the following ORMs are supported through individual gems extending Periscope:</p>
+
+<ul>
+<li>Active Record (<a href="https://rubygems.org/gems/periscope-activerecord">periscope-activerecord</a>)</li>
+<li>MongoMapper (<a href="https://rubygems.org/gems/periscope-mongo_mapper">periscope-mongo_mapper</a>)</li>
+<li>Mongoid (<a href="https://rubygems.org/gems/periscope-mongoid">periscope-mongoid</a>)</li>
+<li>DataMapper (<a href="https://rubygems.org/gems/periscope-data_mapper">periscope-data_mapper</a>)</li>
+</ul><p>Simply add the gem to your bundle and you're off!</p>
+
+<h2>The Problem</h2>
+
+<p>More often than not, the index action in a RESTful Rails controller is expected to do a lot more than simply return all the records for a given model. We ask it to do all sorts of stuff like filtering, sorting and paginating results. Of course, this is typically done using <em>scopes</em>.</p>
+
+<p>But it can get ugly building long, complicated chains of scopes in the controller, especially when you try to give your users control over the scoping. Picture this:</p>
+
+<div class="highlight">
+<pre><span class="k">def</span> <span class="nf">index</span>
+  <span class="vi">@articles</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">scoped</span>
+  <span class="vi">@articles</span> <span class="o">=</span> <span class="vi">@articles</span><span class="o">.</span><span class="n">published_after</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:published_after</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="ss">:published_after</span><span class="p">)</span>
+  <span class="vi">@articles</span> <span class="o">=</span> <span class="vi">@articles</span><span class="o">.</span><span class="n">published_before</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:published_before</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="ss">:published_before</span><span class="p">)</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<p>You can imagine how bad this would get if more than two scopes were involved.</p>
+
+<h2>The Solution</h2>
+
+<p>With Periscope, you can have this instead:</p>
+
+<div class="highlight">
+<pre><span class="k">def</span> <span class="nf">index</span>
+  <span class="vi">@articles</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">periscope</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">query_parameters</span><span class="p">)</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<p>The <code>periscope</code> method will find keys in your params matching your scope names and chain your scopes for you.</p>
+
+<p><strong>Note:</strong> We're using <code>request.query_parameters</code> so that we can exclude our controller and action params. <code>request.query_parameters</code> will just return the params that appear in the query string.</p>
+
+<h2>But Wait!</h2>
+
+<p>"What if I don't want to make all my scopes publicly accessible?"</p>
+
+<p>Within your model you can use the <code>scope_accessible</code> method to specify which scopes you want Periscope to honor.</p>
+
+<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">scope</span> <span class="ss">:gender</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">scope</span> <span class="ss">:makes</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="s1">'salary &gt;= ?'</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">scope_accessible</span> <span class="ss">:gender</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<p>And in your controller:</p>
+
+<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">periscope</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">query_parameters</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<p>Requests to <code>/users?gender=male</code> will filter results to only male users. But a request to <code>/users?makes=1000000</code> will return all users, silently ignoring the protected scope.</p>
+
+<p>By default, all scopes are protected.</p>
+
+<h2>There's More!</h2>
+
+<h3>Custom Parameter Parsing</h3>
+
+<p>Sometimes the values you get from the query parameters aren't quite good enough. They may need to be massaged in order to work with your scopes and class methods. In those cases, you can provide a <code>:parser</code> option to your <code>scope_accessible</code> method.</p>
+
+<p>Parsers must respond to the <code>call</code> method, receiving the raw query parameter and returning an array of arguments to pass to the scope or class method.</p>
+
+<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">scope</span> <span class="ss">:gender</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">scope_accessible</span> <span class="ss">:gender</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="o">[</span><span class="n">g</span><span class="o">.</span><span class="n">downcase</span><span class="o">]</span> <span class="p">}</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<h3>On/Off Scopes</h3>
+
+<p>But not all scopes accept arguments. For scopes that you want to toggle on or off, you can set a <code>:boolean =&gt; true</code> option. Whenever the received parameter is truthy, the scope will be applied. Otherwise, it will be skipped.</p>
+
+<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">scope</span> <span class="ss">:male</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="s1">'male'</span><span class="p">)</span>
+  <span class="n">scope</span> <span class="ss">:female</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="s1">'female'</span><span class="p">)</span>
+
+  <span class="n">scope_accessible</span> <span class="ss">:male</span><span class="p">,</span> <span class="ss">:female</span><span class="p">,</span> <span class="n">boolean</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<h3>Custom Method Names</h3>
+
+<p>Sometimes the query parameters you want to open up to your users may collide with existing method names or reserved Ruby words. In order to avoid collision, you can set a <code>:method</code> option to specify what method to use for a query parameter.</p>
+
+<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">Project</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">scope_accessible</span> <span class="ss">:begin</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:begins_after</span>
+  <span class="n">scope_accessible</span> <span class="ss">:end</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:ends_before</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">begins_after</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s1">'begins_at &gt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">ends_before</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s1">'ends_at &lt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<p>Alternatively, you can set <code>:prefix</code> and/or <code>:suffix</code> options, which will be applied to the query parameter name to determine the corresponding method name.</p>
+
+<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">Project</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">scope_accessible</span> <span class="ss">:begin</span><span class="p">,</span> <span class="ss">:end</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="s1">'_date'</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">begin_date</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s1">'begins_at &gt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">end_date</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s1">'ends_at &lt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<h2>This sucks.</h2>
+
+<p>How can I make it better?</p>
+
+<ol>
+<li>Fork it.</li>
+<li>Make it better.</li>
+<li>Send me a pull request.</li>
+</ol>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/laserlemon">laserlemon</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
