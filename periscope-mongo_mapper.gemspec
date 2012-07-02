@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/laserlemon/periscope'
 
-  gem.add_dependency 'mongo_mapper', '~> 0.11'
+  gem.add_dependency 'mongo_mapper', '~> 0.9'
   gem.add_dependency 'periscope', '~> 1.0'
 
   gem.add_development_dependency 'bson_ext', '~> 1.4'
