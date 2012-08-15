@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'periscope', '~> 1.0'
 
   gem.add_development_dependency 'database_cleaner', '~> 0.8'
-  gem.add_development_dependency 'factory_girl', '>= 2', '< 4'
+  gem.add_development_dependency 'factory_girl', '>= 2', '< 5'
   gem.add_development_dependency 'rspec', '~> 2.0'
 
   gem.files = %w(
