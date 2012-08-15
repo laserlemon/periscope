@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/laserlemon/periscope'
 
-  gem.add_dependency 'mongoid', '~> 2.0'
+  gem.add_dependency 'mongoid', '>= 2', '< 4'
   gem.add_dependency 'periscope', '~> 1.0'
 
   gem.add_development_dependency 'database_cleaner', '~> 0.8'

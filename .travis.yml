@@ -17,6 +17,13 @@ gemfile:
   - gemfiles/mongoid/2-2.gemfile
   - gemfiles/mongoid/2-3.gemfile
   - gemfiles/mongoid/2-4.gemfile
+  - gemfiles/mongoid/3-0.gemfile
   - gemfiles/data_mapper/1-0.gemfile
   - gemfiles/data_mapper/1-1.gemfile
   - gemfiles/data_mapper/1-2.gemfile
+matrix:
+  exclude:
+    - rvm: 1.8.7
+      gemfile: gemfiles/mongoid/3-0.gemfile
+    - rvm: 1.9.2
+      gemfile: gemfiles/mongoid/3-0.gemfile
