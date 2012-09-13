@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name    = 'periscope-mongo_mapper'
-  gem.version = '1.0.1'
+  gem.version = '1.0.2'
 
   gem.authors     = ['Steve Richert']
   gem.email       = ['steve.richert@gmail.com']
