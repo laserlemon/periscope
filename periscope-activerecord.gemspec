@@ -9,6 +9,7 @@ Gem::Specification.new do |gem|
   gem.description = %(Push your ActiveRecord models' scopes up to the surface)
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/laserlemon/periscope'
+  gem.license     = 'MIT'
 
   gem.add_dependency 'activerecord', '~> 3.0'
   gem.add_dependency 'periscope', '~> 1.0'
