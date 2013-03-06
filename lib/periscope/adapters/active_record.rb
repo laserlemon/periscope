@@ -1,5 +1,5 @@
-require 'periscope'
-require 'active_record'
+require "periscope"
+require "active_record"
 
 module Periscope
   module Adapters
@@ -9,7 +9,7 @@ module Periscope
       private
 
       def periscope_default_scope
-        scoped
+        ::ActiveRecord::VERSION::MAJOR == 4 ? all : scoped
       end
     end
   end
