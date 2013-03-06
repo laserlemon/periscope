@@ -1,22 +1,21 @@
 # encoding: utf-8
 
 Gem::Specification.new do |gem|
-  gem.name    = 'periscope-mongo_mapper'
-  gem.version = '1.0.2'
+  gem.name    = "periscope-mongo_mapper"
+  gem.version = "2.0.0"
 
-  gem.authors     = ['Steve Richert']
-  gem.email       = ['steve.richert@gmail.com']
-  gem.description = %(Push your MongoMapper models' scopes up to the surface)
-  gem.summary     = gem.description
-  gem.homepage    = 'https://github.com/laserlemon/periscope'
+  gem.author   = "Steve Richert"
+  gem.email    = "steve.richert@gmail.com"
+  gem.summary  = "Push your MongoMapper models' scopes up to the surface"
+  gem.homepage = "https://github.com/laserlemon/periscope"
 
-  gem.add_dependency 'mongo_mapper', '~> 0.9'
-  gem.add_dependency 'periscope', '~> 1.0'
+  gem.add_dependency "mongo_mapper", "~> 0.9"
+  gem.add_dependency "periscope", "~> 2.0"
 
   gem.files = %w(
-    LICENSE
     lib/periscope-mongo_mapper.rb
     lib/periscope/adapters/mongo_mapper.rb
+    LICENSE.md
     periscope-mongo_mapper.gemspec
     README.md
   )

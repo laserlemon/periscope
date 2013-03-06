@@ -1,22 +1,21 @@
 # encoding: utf-8
 
 Gem::Specification.new do |gem|
-  gem.name    = 'periscope-mongoid'
-  gem.version = '1.1.0'
+  gem.name    = "periscope-mongoid"
+  gem.version = "2.0.0"
 
-  gem.authors     = ['Steve Richert']
-  gem.email       = ['steve.richert@gmail.com']
-  gem.description = %(Push your Mongoid models' scopes up to the surface)
-  gem.summary     = gem.description
-  gem.homepage    = 'https://github.com/laserlemon/periscope'
+  gem.author   = "Steve Richert"
+  gem.email    = "steve.richert@gmail.com"
+  gem.summary  = "Push your Mongoid models' scopes up to the surface"
+  gem.homepage = "https://github.com/laserlemon/periscope"
 
-  gem.add_dependency 'mongoid', '>= 2', '< 4'
-  gem.add_dependency 'periscope', '~> 1.0'
+  gem.add_dependency "mongoid", ">= 2", "< 4"
+  gem.add_dependency "periscope", "~> 2.0"
 
   gem.files = %w(
-    LICENSE
     lib/periscope-mongoid.rb
     lib/periscope/adapters/mongoid.rb
+    LICENSE.md
     periscope-mongoid.gemspec
     README.md
   )
