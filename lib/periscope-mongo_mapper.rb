@@ -1,1 +1,1 @@
-require 'periscope/adapters/mongo_mapper'
+require "periscope/adapters/mongo_mapper"

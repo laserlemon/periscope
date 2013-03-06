@@ -1,5 +1,5 @@
-require 'periscope'
-require 'mongo_mapper'
+require "periscope"
+require "mongo_mapper"
 
 module Periscope
   module Adapters

@@ -1,1 +1,1 @@
-require 'periscope/adapters/data_mapper'
+require "periscope/adapters/data_mapper"

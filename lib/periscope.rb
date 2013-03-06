@@ -1,7 +1,7 @@
 module Periscope
   def scope_accessible(*scopes)
     options = scopes.last.is_a?(Hash) ? scopes.pop : {}
-    scopes.each{|s| periscope_options[s.to_s] = options }
+    scopes.each { |s| periscope_options[s.to_s] = options }
   end
 
   def periscope(params = {})

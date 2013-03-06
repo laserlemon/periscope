@@ -1,1 +1,1 @@
-require 'periscope/adapters/mongoid'
+require "periscope/adapters/mongoid"

@@ -1,5 +1,5 @@
-require 'periscope'
-require 'dm-core'
+require "periscope"
+require "dm-core"
 
 module Periscope
   module Adapters

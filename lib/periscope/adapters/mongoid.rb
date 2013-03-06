@@ -1,5 +1,5 @@
-require 'periscope'
-require 'mongoid'
+require "periscope"
+require "mongoid"
 
 module Periscope
   module Adapters
