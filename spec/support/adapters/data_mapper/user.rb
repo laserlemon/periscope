@@ -1,4 +1,4 @@
-require File.expand_path('../connection', __FILE__)
+require File.expand_path("../connection", __FILE__)
 
 class User
   include DataMapper::Resource
@@ -8,15 +8,15 @@ class User
   property :salary, Integer
 
   def self.male
-    all(:gender => 'male')
+    all(gender: "male")
   end
 
   def self.female
-    all(:gender => 'female')
+    all(gender: "female")
   end
 
   def self.gender(gender)
-    all(:gender => gender)
+    all(gender: gender)
   end
 
   def self.makes(salary)

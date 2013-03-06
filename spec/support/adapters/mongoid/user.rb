@@ -1,16 +1,16 @@
-require File.expand_path('../connection', __FILE__)
+require File.expand_path("../connection", __FILE__)
 
 class User
   include Mongoid::Document
 
-  field :gender, :type => String
-  field :salary, :type => Integer
+  field :gender, type: String
+  field :salary, type: Integer
 
-  scope :male, where(:gender => 'male')
-  scope :female, where(:gender => 'female')
+  scope :male, proc { where(gender: "male") }
+  scope :female, proc { where(gender: "female") }
 
   def self.gender(gender)
-    where(:gender => gender)
+    where(gender: gender)
   end
 
   def self.makes(salary)

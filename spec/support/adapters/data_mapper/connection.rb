@@ -1,3 +1,3 @@
-require 'dm-core'
+require "dm-core"
 
-DataMapper.setup(:default, 'sqlite::memory:')
+DataMapper.setup(:default, "sqlite::memory:")
