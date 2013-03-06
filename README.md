@@ -1,8 +1,9 @@
 # Periscope
 [![Gem Version](https://badge.fury.io/rb/periscope.png)](http://badge.fury.io/rb/periscope)
 [![Build Status](https://travis-ci.org/laserlemon/periscope.png?branch=master)](https://travis-ci.org/laserlemon/periscope)
-[![Dependency Status](https://gemnasium.com/laserlemon/periscope.png)](https://gemnasium.com/laserlemon/periscope)
 [![Code Climate](https://codeclimate.com/github/laserlemon/periscope.png)](https://codeclimate.com/github/laserlemon/periscope)
+[![Coverage Status](https://coveralls.io/repos/laserlemon/periscope/badge.png?branch=master)](https://coveralls.io/r/laserlemon/periscope)
+[![Dependency Status](https://gemnasium.com/laserlemon/periscope.png)](https://gemnasium.com/laserlemon/periscope)
 
 Periscope provides a simple way to chain scopes on your models and to open those scopes up to your users.
 

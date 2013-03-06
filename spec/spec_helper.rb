@@ -1,3 +1,6 @@
+require "coveralls"
+Coveralls.wear!
+
 require "periscope"
 
 Dir["./spec/shared/*.rb"].each { |f| require f }

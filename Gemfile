@@ -8,6 +8,7 @@ gemspec name: "periscope-mongoid"
 
 group :test do
   gem "bson_ext", "~> 1.8"
+  gem "coveralls", "~> 0.6", require: false
   gem "database_cleaner", "~> 0.9"
   gem "dm-migrations", "~> 1.2"
   gem "dm-sqlite-adapter", "~> 1.2"
