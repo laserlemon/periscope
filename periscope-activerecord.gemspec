@@ -13,11 +13,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activerecord', '~> 3.0'
   gem.add_dependency 'periscope', '~> 1.0'
 
-  gem.add_development_dependency 'database_cleaner', '~> 0.8'
-  gem.add_development_dependency 'factory_girl', '>= 2', '< 5'
-  gem.add_development_dependency 'rspec', '~> 2.0'
-  gem.add_development_dependency 'sqlite3'
-
   gem.files = %w(
     LICENSE
     lib/periscope-activerecord.rb
