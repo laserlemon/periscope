@@ -28,6 +28,18 @@ end
 
 task :env do
   ENV["ADAPTER"] = nil
+  ENV["COVERAGE"] = "true"
+end
+
+task :coveralls do
+  require "simplecov"
+  require "coveralls"
+
+  Coveralls::SimpleCov::Formatter.new.format(SimpleCov.result)
+end
+
+Rake::Task[:spec].enhance do
+  Rake::Task[:coveralls].invoke
 end
 
 task default: :spec

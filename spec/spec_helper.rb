@@ -1,17 +1,11 @@
-require "simplecov"
-require "coveralls"
-
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-
 adapter, gemfile = ENV["ADAPTER"], ENV["BUNDLE_GEMFILE"]
 adapter ||= gemfile && gemfile[%r(gemfiles/(.*?)/)] && $1
 
-SimpleCov.command_name(adapter)
-SimpleCov.start do
-  add_filter("spec")
+if ENV["COVERAGE"]
+  require "simplecov"
+
+  SimpleCov.command_name(adapter)
+  SimpleCov.start { add_filter("spec") }
 end
 
 require "periscope"
