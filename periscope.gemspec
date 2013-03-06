@@ -8,6 +8,7 @@ Gem::Specification.new do |gem|
   gem.email    = "steve.richert@gmail.com"
   gem.summary  = "Push your models' scopes up to the surface"
   gem.homepage = "https://github.com/laserlemon/periscope"
+  gem.license  = "MIT"
 
   gem.files = %w(
     lib/periscope.rb

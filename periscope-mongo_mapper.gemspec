@@ -8,6 +8,7 @@ Gem::Specification.new do |gem|
   gem.email    = "steve.richert@gmail.com"
   gem.summary  = "Push your MongoMapper models' scopes up to the surface"
   gem.homepage = "https://github.com/laserlemon/periscope"
+  gem.license  = "MIT"
 
   gem.add_dependency "mongo_mapper", "~> 0.9"
   gem.add_dependency "periscope", "~> 2.0"
