@@ -29,3 +29,7 @@ matrix:
       gemfile: gemfiles/mongoid/3-0.gemfile
     - rvm: 1.9.2
       gemfile: gemfiles/active_record/4-0.gemfile
+  include:
+    - rvm: 1.9.3
+      gemfile: Gemfile
+      script: rake
