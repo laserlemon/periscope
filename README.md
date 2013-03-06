@@ -51,8 +51,8 @@ Within your model you can use the `scope_accessible` method to specify which sco
 
 ```ruby
 class User < ActiveRecord::Base
-  scope :gender, lambda{|g| where(gender: g) }
-  scope :makes, lambda{|s| where('salary >= ?', s) }
+  scope :gender, proc { |g| where(gender: g) }
+  scope :makes, proc { |s| where("salary >= ?", s) }
 
   scope_accessible :gender
 end
@@ -82,9 +82,9 @@ Parsers must respond to the `call` method, receiving the raw query parameter and
 
 ```ruby
 class User < ActiveRecord::Base
-  scope :gender, lambda{|g| where(gender: g) }
+  scope :gender, proc { |g| where(gender: g) }
 
-  scope_accessible :gender, parser: lambda{|g| [g.downcase] }
+  scope_accessible :gender, parser: proc { |g| [g.downcase] }
 end
 ```
 
@@ -94,8 +94,8 @@ But not all scopes accept arguments. For scopes that you want to toggle on or of
 
 ```ruby
 class User < ActiveRecord::Base
-  scope :male, where(gender: 'male')
-  scope :female, where(gender: 'female')
+  scope :male, proc { where(gender: "male") }
+  scope :female, proc { where(gender: "female") }
 
   scope_accessible :male, :female, boolean: true
 end
@@ -111,11 +111,11 @@ class Project < ActiveRecord::Base
   scope_accessible :end, method: :ends_before
 
   def self.begins_after(date)
-    where('begins_at >= ?', date)
+    where("begins_at >= ?", date)
   end
 
   def self.ends_before(date)
-    where('ends_at <= ?', date)
+    where("ends_at <= ?", date)
   end
 end
 ```
@@ -124,14 +124,14 @@ Alternatively, you can set `:prefix` and/or `:suffix` options, which will be app
 
 ```ruby
 class Project < ActiveRecord::Base
-  scope_accessible :begin, :end, suffix: '_date'
+  scope_accessible :begin, :end, suffix: "_date"
 
   def self.begin_date(date)
-    where('begins_at >= ?', date)
+    where("begins_at >= ?", date)
   end
 
   def self.end_date(date)
-    where('ends_at <= ?', date)
+    where("ends_at <= ?", date)
   end
 end
 ```
