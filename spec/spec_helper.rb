@@ -1,14 +1,23 @@
+require "simplecov"
 require "coveralls"
-Coveralls.wear!
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+
+adapter, gemfile = ENV["ADAPTER"], ENV["BUNDLE_GEMFILE"]
+adapter ||= gemfile && gemfile[%r(gemfiles/(.*?)/)] && $1
+
+SimpleCov.command_name(adapter)
+SimpleCov.start do
+  add_filter("spec")
+end
 
 require "periscope"
 
 Dir["./spec/shared/*.rb"].each { |f| require f }
 Dir["./spec/support/*.rb"].each { |f| require f }
-
-# Respect explicitly set adapter or infer based on active gemfile
-adapter, gemfile = ENV["ADAPTER"], ENV["BUNDLE_GEMFILE"]
-adapter ||= gemfile && gemfile[%r(gemfiles/(.*?)/)] && $1
 
 if adapter
   require "periscope/adapters/#{adapter}"
