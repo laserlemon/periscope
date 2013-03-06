@@ -39,8 +39,13 @@
         <ul></ul>
       </nav>
       <section>
-        <h1>Periscope <a href="http://travis-ci.org/laserlemon/periscope"><img src="https://secure.travis-ci.org/laserlemon/periscope.png" alt="Build Status"></a> <a href="https://gemnasium.com/laserlemon/periscope"><img src="https://gemnasium.com/laserlemon/periscope.png" alt="Dependency Status"></a>
-</h1>
+        <h1>Periscope</h1>
+
+<p><a href="http://badge.fury.io/rb/periscope"><img src="https://badge.fury.io/rb/periscope.png" alt="Gem Version"></a>
+<a href="https://travis-ci.org/laserlemon/periscope"><img src="https://travis-ci.org/laserlemon/periscope.png?branch=master" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/laserlemon/periscope"><img src="https://codeclimate.com/github/laserlemon/periscope.png" alt="Code Climate"></a>
+<a href="https://coveralls.io/r/laserlemon/periscope"><img src="https://coveralls.io/repos/laserlemon/periscope/badge.png?branch=master" alt="Coverage Status"></a>
+<a href="https://gemnasium.com/laserlemon/periscope"><img src="https://gemnasium.com/laserlemon/periscope.png" alt="Dependency Status"></a></p>
 
 <p>Periscope provides a simple way to chain scopes on your models and to open those scopes up to your users.</p>
 
@@ -61,15 +66,12 @@
 
 <p>But it can get ugly building long, complicated chains of scopes in the controller, especially when you try to give your users control over the scoping. Picture this:</p>
 
-<div class="highlight">
-<pre><span class="k">def</span> <span class="nf">index</span>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span>
   <span class="vi">@articles</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">scoped</span>
   <span class="vi">@articles</span> <span class="o">=</span> <span class="vi">@articles</span><span class="o">.</span><span class="n">published_after</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:published_after</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="ss">:published_after</span><span class="p">)</span>
   <span class="vi">@articles</span> <span class="o">=</span> <span class="vi">@articles</span><span class="o">.</span><span class="n">published_before</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:published_before</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="ss">:published_before</span><span class="p">)</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <p>You can imagine how bad this would get if more than two scopes were involved.</p>
 
@@ -77,13 +79,10 @@
 
 <p>With Periscope, you can have this instead:</p>
 
-<div class="highlight">
-<pre><span class="k">def</span> <span class="nf">index</span>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span>
   <span class="vi">@articles</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">periscope</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">query_parameters</span><span class="p">)</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <p>The <code>periscope</code> method will find keys in your params matching your scope names and chain your scopes for you.</p>
 
@@ -95,28 +94,22 @@
 
 <p>Within your model you can use the <code>scope_accessible</code> method to specify which scopes you want Periscope to honor.</p>
 
-<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">scope</span> <span class="ss">:gender</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
-  <span class="n">scope</span> <span class="ss">:makes</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="s1">'salary &gt;= ?'</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">}</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">scope</span> <span class="ss">:gender</span><span class="p">,</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="ss">gender</span><span class="p">:</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">scope</span> <span class="ss">:makes</span><span class="p">,</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="s2">"salary &gt;= ?"</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">}</span>
 
   <span class="n">scope_accessible</span> <span class="ss">:gender</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <p>And in your controller:</p>
 
-<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="k">def</span> <span class="nf">index</span>
     <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">periscope</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">query_parameters</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <p>Requests to <code>/users?gender=male</code> will filter results to only male users. But a request to <code>/users?makes=1000000</code> will return all users, silently ignoring the protected scope.</p>
 
@@ -130,69 +123,57 @@
 
 <p>Parsers must respond to the <code>call</code> method, receiving the raw query parameter and returning an array of arguments to pass to the scope or class method.</p>
 
-<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">scope</span> <span class="ss">:gender</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">scope</span> <span class="ss">:gender</span><span class="p">,</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="ss">gender</span><span class="p">:</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
 
-  <span class="n">scope_accessible</span> <span class="ss">:gender</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="o">[</span><span class="n">g</span><span class="o">.</span><span class="n">downcase</span><span class="o">]</span> <span class="p">}</span>
+  <span class="n">scope_accessible</span> <span class="ss">:gender</span><span class="p">,</span> <span class="ss">parser</span><span class="p">:</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span> <span class="o">[</span><span class="n">g</span><span class="o">.</span><span class="n">downcase</span><span class="o">]</span> <span class="p">}</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h3>On/Off Scopes</h3>
 
 <p>But not all scopes accept arguments. For scopes that you want to toggle on or off, you can set a <code>:boolean =&gt; true</code> option. Whenever the received parameter is truthy, the scope will be applied. Otherwise, it will be skipped.</p>
 
-<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">scope</span> <span class="ss">:male</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="s1">'male'</span><span class="p">)</span>
-  <span class="n">scope</span> <span class="ss">:female</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="n">gender</span><span class="p">:</span> <span class="s1">'female'</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">scope</span> <span class="ss">:male</span><span class="p">,</span> <span class="nb">proc</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">gender</span><span class="p">:</span> <span class="s2">"male"</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">scope</span> <span class="ss">:female</span><span class="p">,</span> <span class="nb">proc</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">gender</span><span class="p">:</span> <span class="s2">"female"</span><span class="p">)</span> <span class="p">}</span>
 
-  <span class="n">scope_accessible</span> <span class="ss">:male</span><span class="p">,</span> <span class="ss">:female</span><span class="p">,</span> <span class="n">boolean</span><span class="p">:</span> <span class="kp">true</span>
+  <span class="n">scope_accessible</span> <span class="ss">:male</span><span class="p">,</span> <span class="ss">:female</span><span class="p">,</span> <span class="ss">boolean</span><span class="p">:</span> <span class="kp">true</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h3>Custom Method Names</h3>
 
 <p>Sometimes the query parameters you want to open up to your users may collide with existing method names or reserved Ruby words. In order to avoid collision, you can set a <code>:method</code> option to specify what method to use for a query parameter.</p>
 
-<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">Project</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Project</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
   <span class="n">scope_accessible</span> <span class="ss">:begin</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:begins_after</span>
   <span class="n">scope_accessible</span> <span class="ss">:end</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:ends_before</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">begins_after</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-    <span class="n">where</span><span class="p">(</span><span class="s1">'begins_at &gt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s2">"begins_at &gt;= ?"</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">ends_before</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-    <span class="n">where</span><span class="p">(</span><span class="s1">'ends_at &lt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s2">"ends_at &lt;= ?"</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <p>Alternatively, you can set <code>:prefix</code> and/or <code>:suffix</code> options, which will be applied to the query parameter name to determine the corresponding method name.</p>
 
-<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">Project</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">scope_accessible</span> <span class="ss">:begin</span><span class="p">,</span> <span class="ss">:end</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="s1">'_date'</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Project</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">scope_accessible</span> <span class="ss">:begin</span><span class="p">,</span> <span class="ss">:end</span><span class="p">,</span> <span class="ss">suffix</span><span class="p">:</span> <span class="s2">"_date"</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">begin_date</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-    <span class="n">where</span><span class="p">(</span><span class="s1">'begins_at &gt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s2">"begins_at &gt;= ?"</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">end_date</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-    <span class="n">where</span><span class="p">(</span><span class="s1">'ends_at &lt;= ?'</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="s2">"ends_at &lt;= ?"</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h2>This sucks.</h2>
 
@@ -209,7 +190,7 @@
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
 </html>
