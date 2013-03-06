@@ -11,35 +11,34 @@ ADAPTERS = %w(active_record data_mapper mongo_mapper mongoid)
 
 ADAPTERS.each do |adapter|
   desc "Run RSpec code examples for #{adapter} adapter"
-  RSpec::Core::RakeTask.new(adapter => "#{adapter}:env") do |t|
+  RSpec::Core::RakeTask.new(adapter => "#{adapter}:adapter") do |t|
     t.pattern = "spec/periscope/adapters/#{adapter}_spec.rb"
   end
 
   namespace adapter do
-    task :env do
+    task :adapter do
       ENV["ADAPTER"] = adapter
     end
   end
 end
 
-RSpec::Core::RakeTask.new(spec: (ADAPTERS + [:env])) do |t|
+RSpec::Core::RakeTask.new(spec: [:coverage] + ADAPTERS + [:adapter]) do |t|
   t.pattern = "spec/periscope_spec.rb"
 end
 
-task :env do
-  ENV["ADAPTER"] = nil
+task :coverage do
   ENV["COVERAGE"] = "true"
 end
 
-task :coveralls do
+task :adapter do
+  ENV["ADAPTER"] = nil
+end
+
+Rake::Task[:spec].enhance do
   require "simplecov"
   require "coveralls"
 
   Coveralls::SimpleCov::Formatter.new.format(SimpleCov.result)
-end
-
-Rake::Task[:spec].enhance do
-  Rake::Task[:coveralls].invoke
 end
 
 task default: :spec
