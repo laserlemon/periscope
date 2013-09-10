@@ -117,6 +117,36 @@ shared_examples "periscopic" do
       model.periscope(foo: "bar")
     end
 
+    it "allows accessible scope exclusion given a blank param" do
+      model.should_not_receive(:foo)
+      model.scope_accessible(:foo, ignore_blank: true)
+      model.periscope(foo: nil)
+      model.periscope(foo: "")
+      model.periscope(foo: [])
+      model.periscope(foo: {})
+    end
+
+    it "calls accessible scopes with values when ignoring blank params" do
+      expect_scopes(foo: ["bar"])
+      model.scope_accessible(:foo, ignore_blank: true)
+      model.periscope(foo: "bar")
+    end
+
+    it "allows accessible boolean scope exclusion given a blank param" do
+      model.should_not_receive(:foo)
+      model.scope_accessible(:foo, boolean: true, ignore_blank: true)
+      model.periscope(foo: nil)
+      model.periscope(foo: "")
+      model.periscope(foo: [])
+      model.periscope(foo: {})
+    end
+
+    it "calls accessible boolean scopes when ignoring blank params" do
+      expect_scopes(foo: [])
+      model.scope_accessible(:foo, boolean: true, ignore_blank: true)
+      model.periscope(foo: "bar")
+    end
+
     it "passes along a nil param" do
       expect_scopes(foo: [nil])
       model.scope_accessible(:foo)
