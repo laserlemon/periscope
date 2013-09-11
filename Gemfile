@@ -9,7 +9,7 @@ gemspec name: "periscope-mongoid"
 group :test do
   gem "bson_ext", "~> 1.9"
   gem "coveralls", "~> 0.6", require: false
-  gem "database_cleaner", "~> 1.0.1"
+  gem "database_cleaner", "~> 0.9"
   gem "dm-migrations", "~> 1.2"
   gem "dm-sqlite-adapter", "~> 1.2"
   gem "factory_girl", "~> 4.2"

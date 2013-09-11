@@ -5,7 +5,7 @@ gem "mongoid", "~> 2.0.0"
 gemspec name: "periscope-mongoid", path: "../../"
 
 group :test do
-  gem "database_cleaner", "~> 1.0.1"
+  gem "database_cleaner", "~> 0.9"
   gem "factory_girl", "~> 4.2"
   gem "rake", "~> 10.1"
   gem "rspec", "~> 2.14"
