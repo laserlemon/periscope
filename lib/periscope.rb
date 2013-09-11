@@ -26,11 +26,24 @@ module Periscope
     method = periscope_method(scope, options)
     values = periscope_values(param, options)
 
-    if options[:boolean]
-      values.first ? chain.send(method) : chain
+    if periscope_ignore?(values.first, options)
+      chain
     else
-      chain.send(method, *values)
+      options[:boolean] ? chain.send(method) : chain.send(method, *values)
     end
+  end
+
+  def periscope_ignore?(value, options)
+    if options[:ignore_blank]
+      periscope_blank?(value)
+    elsif options[:boolean]
+      !value
+    end
+  end
+
+  def periscope_blank?(value)
+    return true unless value
+    value.respond_to?(:blank?) ? value.blank? : value.empty?
   end
 
   def periscope_method(scope, options)
