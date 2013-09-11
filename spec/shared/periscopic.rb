@@ -11,13 +11,13 @@ shared_examples "periscopic" do
     end
 
     it "uses the default scope for no params" do
-      scoped = mock.as_null_object
+      scoped = double(:scoped).as_null_object
       model.should_receive(:periscope_default_scope).once.and_return(scoped)
       model.periscope.should == scoped
     end
 
     it "uses the default scope for empty params" do
-      scoped = mock.as_null_object
+      scoped = double(:scoped).as_null_object
       model.should_receive(:periscope_default_scope).once.and_return(scoped)
       model.periscope({}).should == scoped
     end
@@ -93,7 +93,7 @@ shared_examples "periscopic" do
 
     it "allows custom parameter parsing via custom parser" do
       expect_scopes(foo: ["BAR"])
-      parser = mock.as_null_object
+      parser = double(:parser).as_null_object
       parser.should_receive(:call).once.with("bar").and_return(["BAR"])
       model.scope_accessible(:foo, parser: parser)
       model.periscope(foo: "bar")
