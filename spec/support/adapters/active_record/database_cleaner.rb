@@ -1,3 +1,5 @@
+require File.expand_path("../connection", __FILE__)
+
 require "database_cleaner"
 
 DatabaseCleaner["active_record"].strategy = :truncation
