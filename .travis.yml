@@ -18,17 +18,15 @@ gemfile:
   - gemfiles/mongoid/2-2.gemfile
   - gemfiles/mongoid/2-3.gemfile
   - gemfiles/mongoid/2-4.gemfile
+  - gemfiles/mongoid/2-5.gemfile
+  - gemfiles/mongoid/2-6.gemfile
   - gemfiles/mongoid/3-0.gemfile
+  - gemfiles/mongoid/3-1.gemfile
   - gemfiles/data_mapper/1-0.gemfile
   - gemfiles/data_mapper/1-1.gemfile
   - gemfiles/data_mapper/1-2.gemfile
 matrix:
-  exclude:
-    - rvm: 1.9.2
-      gemfile: gemfiles/mongoid/3-0.gemfile
-    - rvm: 1.9.2
-      gemfile: gemfiles/active_record/4-0.gemfile
   include:
-    - rvm: 1.9.3
+    - rvm: 2.0.0
       gemfile: Gemfile
       script: rake
