@@ -2,7 +2,6 @@ language: ruby
 script: rspec
 services: mongodb
 rvm:
-  - 1.9.2
   - 1.9.3
   - 2.0.0
 gemfile:
