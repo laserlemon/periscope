@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name    = "periscope-mongoid"
-  gem.version = "2.0.0"
+  gem.version = "2.0.1"
 
   gem.author   = "Steve Richert"
   gem.email    = "steve.richert@gmail.com"
@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.license  = "MIT"
 
   gem.add_dependency "mongoid", ">= 2", "< 4"
-  gem.add_dependency "periscope", "~> 2.0"
+  gem.add_dependency "periscope", "~> 2.0.0"
 
   gem.files = %w(
     lib/periscope-mongoid.rb
