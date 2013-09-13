@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name    = "periscope-mongo_mapper"
-  gem.version = "2.0.1"
+  gem.version = "2.1.0"
 
   gem.author   = "Steve Richert"
   gem.email    = "steve.richert@gmail.com"
@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.license  = "MIT"
 
   gem.add_dependency "mongo_mapper", "~> 0.9"
-  gem.add_dependency "periscope", "~> 2.0.0"
+  gem.add_dependency "periscope", "~> 2.1.0"
 
   gem.files = %w(
     lib/periscope-mongo_mapper.rb
