@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
 
   gem.files = %w(
     lib/periscope.rb
-    LICENSE.md
+    LICENSE.txt
     periscope.gemspec
     README.md
   )

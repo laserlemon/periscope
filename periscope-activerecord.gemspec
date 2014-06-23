@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.files = %w(
     lib/periscope-activerecord.rb
     lib/periscope/adapters/active_record.rb
-    LICENSE.md
+    LICENSE.txt
     periscope-activerecord.gemspec
     README.md
   )

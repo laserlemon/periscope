@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.files = %w(
     lib/periscope-mongoid.rb
     lib/periscope/adapters/mongoid.rb
-    LICENSE.md
+    LICENSE.txt
     periscope-mongoid.gemspec
     README.md
   )

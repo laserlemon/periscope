@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.files = %w(
     lib/periscope-data_mapper.rb
     lib/periscope/adapters/data_mapper.rb
-    LICENSE.md
+    LICENSE.txt
     periscope-data_mapper.gemspec
     README.md
   )
