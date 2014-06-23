@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+
+gem "mongo_mapper", "~> 0.13.0"
+
+gemspec name: "periscope-mongo_mapper", path: "../../"
+
+group :test do
+  gem "bson_ext", "~> 1.9"
+  gem "database_cleaner", "~> 0.9"
+  gem "factory_girl", "~> 4.2"
+  gem "rake", "~> 10.1"
+  gem "rspec", "~> 2.14"
+end
