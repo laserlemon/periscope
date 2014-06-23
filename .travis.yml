@@ -1,9 +1,10 @@
 language: ruby
-script: rspec
+script: bundle exec rspec
 services: mongodb
 rvm:
   - 1.9.3
-  - 2.0.0
+  - "2.0"
+  - "2.1"
 gemfile:
   - gemfiles/active_record/3-0.gemfile
   - gemfiles/active_record/3-1.gemfile
@@ -29,6 +30,6 @@ gemfile:
   - gemfiles/mongoid/3-1.gemfile
 matrix:
   include:
-    - rvm: 2.0.0
+    - rvm: "2.1"
       gemfile: Gemfile
       script: rake
