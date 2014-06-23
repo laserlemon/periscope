@@ -28,8 +28,3 @@ gemfile:
   - gemfiles/mongoid/2-8.gemfile
   - gemfiles/mongoid/3-0.gemfile
   - gemfiles/mongoid/3-1.gemfile
-matrix:
-  include:
-    - rvm: "2.1"
-      gemfile: Gemfile
-      script: rake

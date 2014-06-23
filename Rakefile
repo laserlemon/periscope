@@ -22,23 +22,12 @@ ADAPTERS.each do |adapter|
   end
 end
 
-RSpec::Core::RakeTask.new(spec: [:coverage] + ADAPTERS + [:adapter]) do |t|
+RSpec::Core::RakeTask.new(spec: ADAPTERS + [:adapter]) do |t|
   t.pattern = "spec/periscope_spec.rb"
-end
-
-task :coverage do
-  ENV["COVERAGE"] = "true"
 end
 
 task :adapter do
   ENV["ADAPTER"] = nil
-end
-
-Rake::Task[:spec].enhance do
-  require "simplecov"
-  require "coveralls"
-
-  Coveralls::SimpleCov::Formatter.new.format(SimpleCov.result)
 end
 
 task default: :spec

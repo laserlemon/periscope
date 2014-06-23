@@ -1,13 +1,6 @@
 adapter, gemfile = ENV["ADAPTER"], ENV["BUNDLE_GEMFILE"]
 adapter ||= gemfile && gemfile[%r(gemfiles/(.*?)/)] && $1
 
-if ENV["COVERAGE"]
-  require "simplecov"
-
-  SimpleCov.command_name(adapter)
-  SimpleCov.start { add_filter("spec") }
-end
-
 require "periscope"
 
 Dir["./spec/shared/*.rb"].shuffle.each { |f| require f }
