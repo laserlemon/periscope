@@ -12,6 +12,6 @@ group :test do
   gem "dm-migrations", "~> 1.2"
   gem "dm-sqlite-adapter", "~> 1.2"
   gem "factory_girl", "~> 4.4"
-  gem "rspec", "~> 2.14"
+  gem "rspec", "~> 3.0"
   gem "sqlite3", "~> 1.3"
 end

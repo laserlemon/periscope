@@ -1,29 +1,30 @@
 shared_examples "periscopic" do
   context "without a database" do
     before do
-      model.stub(periscope_default_scope: model)
+      allow(model).to receive(:periscope_default_scope).and_return(model)
     end
 
     def expect_scopes(calls)
       calls.each do |method, args|
-        model.should_receive(method).with(*args).and_return(model)
+        args << no_args if args.empty?
+        expect(model).to receive(method).with(*args).and_return(model)
       end
     end
 
     it "uses the default scope for no params" do
       scoped = double(:scoped).as_null_object
-      model.should_receive(:periscope_default_scope).once.and_return(scoped)
-      model.periscope.should == scoped
+      expect(model).to receive(:periscope_default_scope).once.and_return(scoped)
+      expect(model.periscope).to eq(scoped)
     end
 
     it "uses the default scope for empty params" do
       scoped = double(:scoped).as_null_object
-      model.should_receive(:periscope_default_scope).once.and_return(scoped)
-      model.periscope({}).should == scoped
+      expect(model).to receive(:periscope_default_scope).once.and_return(scoped)
+      expect(model.periscope({})).to eq(scoped)
     end
 
     it "ignores protected scopes" do
-      model.should_not_receive(:foo)
+      expect(model).not_to receive(:foo)
       model.periscope(foo: "bar")
     end
 
@@ -41,7 +42,7 @@ shared_examples "periscopic" do
 
     it "ignores protected scopes when mixed with accessible scopes" do
       expect_scopes(foo: ["baz"])
-      model.should_not_receive(:bar)
+      expect(model).not_to receive(:bar)
       model.scope_accessible(:foo)
       model.periscope(foo: "baz", bar: "mitzvah")
     end
@@ -94,7 +95,7 @@ shared_examples "periscopic" do
     it "allows custom parameter parsing via custom parser" do
       expect_scopes(foo: ["BAR"])
       parser = double(:parser).as_null_object
-      parser.should_receive(:call).once.with("bar").and_return(["BAR"])
+      expect(parser).to receive(:call).once.with("bar").and_return(["BAR"])
       model.scope_accessible(:foo, parser: parser)
       model.periscope(foo: "bar")
     end
@@ -106,19 +107,19 @@ shared_examples "periscopic" do
     end
 
     it "allows accessible scope exclusion given a falsey param" do
-      model.should_not_receive(:foo)
+      expect(model).not_to receive(:foo)
       model.scope_accessible(:foo, boolean: true)
       model.periscope(foo: nil)
     end
 
     it "allows accessible scope exclusion given a falsey parsed value" do
-      model.should_not_receive(:foo)
+      expect(model).not_to receive(:foo)
       model.scope_accessible(:foo, boolean: true, parser: proc { [nil] })
       model.periscope(foo: "bar")
     end
 
     it "allows accessible scope exclusion given a blank param" do
-      model.should_not_receive(:foo)
+      expect(model).not_to receive(:foo)
       model.scope_accessible(:foo, ignore_blank: true)
       model.periscope(foo: nil)
       model.periscope(foo: "")
@@ -133,7 +134,7 @@ shared_examples "periscopic" do
     end
 
     it "allows accessible boolean scope exclusion given a blank param" do
-      model.should_not_receive(:foo)
+      expect(model).not_to receive(:foo)
       model.scope_accessible(:foo, boolean: true, ignore_blank: true)
       model.periscope(foo: nil)
       model.periscope(foo: "")
