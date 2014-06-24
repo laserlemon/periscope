@@ -1,3 +1,8 @@
+if ENV["CODECLIMATE_REPO_TOKEN"]
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+end
+
 adapter, gemfile = ENV["ADAPTER"], ENV["BUNDLE_GEMFILE"]
 adapter ||= gemfile && gemfile[%r(gemfiles/(.*?)/)] && $1
 
