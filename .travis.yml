@@ -5,6 +5,7 @@ rvm:
   - 1.9.3
   - "2.0"
   - "2.1"
+  - ruby-head
 gemfile:
   - gemfiles/active_record/3-0.gemfile
   - gemfiles/active_record/3-1.gemfile
@@ -37,3 +38,6 @@ env:
       c1IvkNUiB8/23zmAof8gkthrz79Iou+e/rKddC6w11CNwv0s5nusWgjtwuMg
       fEEfEFU+Q3TPDtZ+YUjXbzRST6w734OqEltU0QNoFd+j1PL94c6o8iEniJT+
       JAhKTfB5G7X8ZApxCSwBg3ADhM5VdNbF1itYQkg4OJac2mQfx38=
+matrix:
+  allow_failures:
+    - rvm: ruby-head
