@@ -9,7 +9,7 @@ module Periscope
       private
 
       def periscope_default_scope
-        ::ActiveRecord::VERSION::MAJOR == 4 ? all : scoped
+        ::ActiveRecord::VERSION::MAJOR >= 4 ? all : scoped
       end
     end
   end
