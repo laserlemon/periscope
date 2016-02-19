@@ -44,6 +44,13 @@ language: ruby
 matrix:
   allow_failures:
     - rvm: ruby-head
+  exclude:
+    - rvm: 1.9.3
+      gemfile: gemfiles/active_record/5-0.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/active_record/5-0.gemfile
+    - rvm: 2.1.8
+      gemfile: gemfiles/active_record/5-0.gemfile
 rvm:
   - 1.9.3
   - 2.0.0
