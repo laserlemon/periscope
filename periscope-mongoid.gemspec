@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name    = "periscope-mongoid"
-  gem.version = "2.1.1"
+  gem.version = "2.1.2"
 
   gem.author   = "Steve Richert"
   gem.email    = "steve.richert@gmail.com"
