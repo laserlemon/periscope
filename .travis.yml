@@ -10,6 +10,8 @@ gemfile:
   - gemfiles/active_record/3-2.gemfile
   - gemfiles/active_record/4-0.gemfile
   - gemfiles/active_record/4-1.gemfile
+  - gemfiles/active_record/4-2.gemfile
+  - gemfiles/active_record/5-0.gemfile
   - gemfiles/data_mapper/1-0.gemfile
   - gemfiles/data_mapper/1-1.gemfile
   - gemfiles/data_mapper/1-2.gemfile
@@ -30,6 +32,8 @@ gemfile:
   - gemfiles/mongoid/3-0.gemfile
   - gemfiles/mongoid/3-1.gemfile
   - gemfiles/mongoid/4-0.gemfile
+  - gemfiles/mongoid/5-0.gemfile
+  - gemfiles/mongoid/5-1.gemfile
 language: ruby
 matrix:
   allow_failures:

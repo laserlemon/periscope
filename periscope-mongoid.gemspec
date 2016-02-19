@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.homepage = "https://github.com/laserlemon/periscope"
   gem.license  = "MIT"
 
-  gem.add_dependency "mongoid", ">= 2", "< 5"
+  gem.add_dependency "mongoid", ">= 2", "< 5.2"
   gem.add_dependency "periscope", "~> 2.1.0"
 
   gem.files = %w(
