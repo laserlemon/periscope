@@ -46,10 +46,10 @@ matrix:
     - rvm: ruby-head
 rvm:
   - 1.9.3
-  - "2.0"
-  - "2.1"
-  - "2.2"
-  - "2.3"
+  - 2.0.0
+  - 2.1.8
+  - 2.2.4
+  - 2.3.0
   - ruby-head
 script: bundle exec rspec
 services: mongodb
