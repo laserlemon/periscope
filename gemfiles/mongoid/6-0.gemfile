@@ -1,13 +1,12 @@
 source "https://rubygems.org"
 
-gem "activerecord", "~> 5.0.0"
+gem "mongoid", "~> 6.0.0"
 
-gemspec name: "periscope-activerecord", path: "../../"
+gemspec name: "periscope-mongoid", path: "../../"
 
 group :test do
   gem "codeclimate-test-reporter", require: false
   gem "database_cleaner"
   gem "factory_girl"
   gem "rspec"
-  gem "sqlite3"
 end

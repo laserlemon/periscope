@@ -18,6 +18,7 @@ gemfile:
   - gemfiles/active_record/4-1.gemfile
   - gemfiles/active_record/4-2.gemfile
   - gemfiles/active_record/5-0.gemfile
+  - gemfiles/active_record/5-1.gemfile
   - gemfiles/data_mapper/1-0.gemfile
   - gemfiles/data_mapper/1-1.gemfile
   - gemfiles/data_mapper/1-2.gemfile
@@ -26,6 +27,7 @@ gemfile:
   - gemfiles/mongo_mapper/0-11.gemfile
   - gemfiles/mongo_mapper/0-12.gemfile
   - gemfiles/mongo_mapper/0-13.gemfile
+  - gemfiles/mongo_mapper/0-14.gemfile
   - gemfiles/mongoid/2-0.gemfile
   - gemfiles/mongoid/2-1.gemfile
   - gemfiles/mongoid/2-2.gemfile
@@ -40,23 +42,18 @@ gemfile:
   - gemfiles/mongoid/4-0.gemfile
   - gemfiles/mongoid/5-0.gemfile
   - gemfiles/mongoid/5-1.gemfile
+  - gemfiles/mongoid/5-2.gemfile
+  - gemfiles/mongoid/6-0.gemfile
+  - gemfiles/mongoid/6-1.gemfile
+  - gemfiles/mongoid/6-2.gemfile
 language: ruby
 matrix:
   allow_failures:
     - rvm: ruby-head
-  exclude:
-    - rvm: 1.9.3
-      gemfile: gemfiles/active_record/5-0.gemfile
-    - rvm: 2.0.0
-      gemfile: gemfiles/active_record/5-0.gemfile
-    - rvm: 2.1.8
-      gemfile: gemfiles/active_record/5-0.gemfile
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.8
-  - 2.2.4
-  - 2.3.0
+  - "2.2"
+  - "2.3"
+  - "2.4"
   - ruby-head
 script: bundle exec rspec
 services: mongodb
