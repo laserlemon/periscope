@@ -5,7 +5,7 @@ gem "mongo_mapper", "~> 0.10.0"
 gemspec name: "periscope-mongo_mapper", path: "../../"
 
 group :test do
-  gem "codeclimate-test-reporter", require: false
+  gem "codeclimate-test-reporter", "~> 1.0"
   gem "database_cleaner"
   gem "factory_girl"
   gem "rspec"

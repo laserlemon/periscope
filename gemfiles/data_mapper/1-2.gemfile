@@ -5,7 +5,7 @@ gem "dm-core", "~> 1.2.0"
 gemspec name: "periscope-data_mapper", path: "../../"
 
 group :test do
-  gem "codeclimate-test-reporter", require: false
+  gem "codeclimate-test-reporter", "~> 1.0"
   gem "database_cleaner"
   gem "dm-migrations"
   gem "dm-sqlite-adapter"

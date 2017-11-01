@@ -5,7 +5,7 @@ gem "mongoid", "~> 2.3.0"
 gemspec name: "periscope-mongoid", path: "../../"
 
 group :test do
-  gem "codeclimate-test-reporter", require: false
+  gem "codeclimate-test-reporter", "~> 1.0"
   gem "database_cleaner"
   gem "factory_girl"
   gem "rspec"

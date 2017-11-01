@@ -7,7 +7,7 @@ gemspec name: "periscope-mongo_mapper"
 gemspec name: "periscope-mongoid"
 
 group :test do
-  gem "codeclimate-test-reporter", require: false
+  gem "codeclimate-test-reporter", "~> 1.0"
   gem "database_cleaner"
   gem "dm-migrations"
   gem "dm-sqlite-adapter"
