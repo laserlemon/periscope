@@ -8,6 +8,8 @@ adapter ||= gemfile && gemfile[%r(gemfiles/(.*?)/)] && $1
 
 require "periscope"
 
+Bundler.require(:test)
+
 Dir["./spec/shared/*.rb"].shuffle.each { |f| require f }
 Dir["./spec/support/*.rb"].shuffle.each { |f| require f }
 
