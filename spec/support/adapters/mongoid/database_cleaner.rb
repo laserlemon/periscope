@@ -9,3 +9,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+# TODO: Remove after this pull request is merged and a new version is released:
+# https://github.com/DatabaseCleaner/database_cleaner/pull/507
+if defined?(::Mongo::VERSION) && ::Mongo::VERSION < "2"
+  ::Mongo.send(:remove_const, :VERSION)
+end
