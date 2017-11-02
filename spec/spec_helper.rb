@@ -8,14 +8,12 @@ adapter ||= gemfile && gemfile[%r(gemfiles/(.*?)/)] && $1
 
 require "periscope"
 
-Bundler.require(:test)
-
 Dir["./spec/shared/*.rb"].shuffle.each { |f| require f }
 Dir["./spec/support/*.rb"].shuffle.each { |f| require f }
 
 if adapter
   require "periscope/adapters/#{adapter}"
-  Dir["./spec/support/adapters/#{adapter}/*.rb"].shuffle.each { |f| require f }
+  Dir["./spec/support/adapters/#{adapter}/*.rb"].shuffle.each { |f| puts f.inspect; require f }
 end
 
 RSpec.configure do |config|

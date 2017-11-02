@@ -6,50 +6,14 @@ branches:
   only:
     - master
 gemfile:
-  - gemfiles/active_record/3-0.gemfile
-  - gemfiles/active_record/3-1.gemfile
-  - gemfiles/active_record/3-2.gemfile
-  - gemfiles/active_record/4-0.gemfile
-  - gemfiles/active_record/4-1.gemfile
-  - gemfiles/active_record/4-2.gemfile
-  - gemfiles/active_record/5-0.gemfile
-  - gemfiles/active_record/5-1.gemfile
-  - gemfiles/data_mapper/1-0.gemfile
-  - gemfiles/data_mapper/1-1.gemfile
-  - gemfiles/data_mapper/1-2.gemfile
-  - gemfiles/mongo_mapper/0-9.gemfile
-  - gemfiles/mongo_mapper/0-10.gemfile
-  - gemfiles/mongo_mapper/0-11.gemfile
-  - gemfiles/mongo_mapper/0-12.gemfile
-  - gemfiles/mongo_mapper/0-13.gemfile
-  - gemfiles/mongo_mapper/0-14.gemfile
-  - gemfiles/mongoid/2-0.gemfile
-  - gemfiles/mongoid/2-1.gemfile
-  - gemfiles/mongoid/2-2.gemfile
-  - gemfiles/mongoid/2-3.gemfile
   - gemfiles/mongoid/2-4.gemfile
   - gemfiles/mongoid/2-5.gemfile
-  - gemfiles/mongoid/2-6.gemfile
-  - gemfiles/mongoid/2-7.gemfile
-  - gemfiles/mongoid/2-8.gemfile
-  - gemfiles/mongoid/3-0.gemfile
-  - gemfiles/mongoid/3-1.gemfile
-  - gemfiles/mongoid/4-0.gemfile
-  - gemfiles/mongoid/5-0.gemfile
-  - gemfiles/mongoid/5-1.gemfile
-  - gemfiles/mongoid/5-2.gemfile
-  - gemfiles/mongoid/6-0.gemfile
-  - gemfiles/mongoid/6-1.gemfile
-  - gemfiles/mongoid/6-2.gemfile
 language: ruby
 matrix:
   allow_failures:
     - rvm: ruby-head
 rvm:
-  - "2.2"
-  - "2.3"
   - "2.4"
-  - ruby-head
 script: bundle exec rspec
 services: mongodb
 sudo: false
