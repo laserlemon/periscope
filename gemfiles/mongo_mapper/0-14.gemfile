@@ -1,10 +1,11 @@
 source "https://rubygems.org"
 
-gem "mongoid", "~> 2.6.0"
+gem "mongo_mapper", "~> 0.14.0"
 
-gemspec name: "periscope-mongoid", path: "../../"
+gemspec name: "periscope-mongo_mapper", path: "../../"
 
 group :test do
+  gem "activemodel-serializers-xml"
   gem "codeclimate-test-reporter", "~> 1.0"
   gem "database_cleaner"
   gem "factory_girl"

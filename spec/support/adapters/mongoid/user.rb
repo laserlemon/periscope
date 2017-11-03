@@ -1,5 +1,7 @@
 require File.expand_path("../connection", __FILE__)
 
+puts "USER"
+
 class User
   include Mongoid::Document
 

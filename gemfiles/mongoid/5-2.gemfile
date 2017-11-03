@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "mongoid", "~> 2.6.0"
+gem "mongoid", "~> 5.2.0"
 
 gemspec name: "periscope-mongoid", path: "../../"
 

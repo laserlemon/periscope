@@ -1,63 +1,19 @@
+after_success:
+  - bundle exec codeclimate-test-reporter
 before_install:
   - gem update bundler rake
 branches:
   only:
     - master
-cache: bundler
-env:
-  global:
-    secure: | # CODECLIMATE_REPO_TOKEN
-      c1IvkNUiB8/23zmAof8gkthrz79Iou+e/rKddC6w11CNwv0s5nusWgjtwuMg
-      fEEfEFU+Q3TPDtZ+YUjXbzRST6w734OqEltU0QNoFd+j1PL94c6o8iEniJT+
-      JAhKTfB5G7X8ZApxCSwBg3ADhM5VdNbF1itYQkg4OJac2mQfx38=
 gemfile:
-  - gemfiles/active_record/3-0.gemfile
-  - gemfiles/active_record/3-1.gemfile
-  - gemfiles/active_record/3-2.gemfile
-  - gemfiles/active_record/4-0.gemfile
-  - gemfiles/active_record/4-1.gemfile
-  - gemfiles/active_record/4-2.gemfile
-  - gemfiles/active_record/5-0.gemfile
-  - gemfiles/data_mapper/1-0.gemfile
-  - gemfiles/data_mapper/1-1.gemfile
-  - gemfiles/data_mapper/1-2.gemfile
-  - gemfiles/mongo_mapper/0-9.gemfile
-  - gemfiles/mongo_mapper/0-10.gemfile
-  - gemfiles/mongo_mapper/0-11.gemfile
-  - gemfiles/mongo_mapper/0-12.gemfile
-  - gemfiles/mongo_mapper/0-13.gemfile
-  - gemfiles/mongoid/2-0.gemfile
-  - gemfiles/mongoid/2-1.gemfile
-  - gemfiles/mongoid/2-2.gemfile
-  - gemfiles/mongoid/2-3.gemfile
   - gemfiles/mongoid/2-4.gemfile
   - gemfiles/mongoid/2-5.gemfile
-  - gemfiles/mongoid/2-6.gemfile
-  - gemfiles/mongoid/2-7.gemfile
-  - gemfiles/mongoid/2-8.gemfile
-  - gemfiles/mongoid/3-0.gemfile
-  - gemfiles/mongoid/3-1.gemfile
-  - gemfiles/mongoid/4-0.gemfile
-  - gemfiles/mongoid/5-0.gemfile
-  - gemfiles/mongoid/5-1.gemfile
 language: ruby
 matrix:
   allow_failures:
     - rvm: ruby-head
-  exclude:
-    - rvm: 1.9.3
-      gemfile: gemfiles/active_record/5-0.gemfile
-    - rvm: 2.0.0
-      gemfile: gemfiles/active_record/5-0.gemfile
-    - rvm: 2.1.8
-      gemfile: gemfiles/active_record/5-0.gemfile
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.8
-  - 2.2.4
-  - 2.3.0
-  - ruby-head
+  - "2.4"
 script: bundle exec rspec
 services: mongodb
 sudo: false

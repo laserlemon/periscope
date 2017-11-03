@@ -1,6 +1,6 @@
 if ENV["CODECLIMATE_REPO_TOKEN"]
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
+  require "simplecov"
+  SimpleCov.start
 end
 
 adapter, gemfile = ENV["ADAPTER"], ENV["BUNDLE_GEMFILE"]
@@ -13,7 +13,7 @@ Dir["./spec/support/*.rb"].shuffle.each { |f| require f }
 
 if adapter
   require "periscope/adapters/#{adapter}"
-  Dir["./spec/support/adapters/#{adapter}/*.rb"].shuffle.each { |f| require f }
+  Dir["./spec/support/adapters/#{adapter}/*.rb"].shuffle.each { |f| puts f.inspect; require f }
 end
 
 RSpec.configure do |config|
